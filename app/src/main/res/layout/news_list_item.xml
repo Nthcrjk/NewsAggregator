@@ -64,11 +64,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/header_item_author_word1"
                 style="@style/AuthorWord1"
                 android:text="Author: " />
 
             <TextView
-                android:id="@+id/header_item_author"
+                android:id="@+id/header_item_author_word2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

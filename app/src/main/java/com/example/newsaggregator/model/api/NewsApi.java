@@ -8,6 +8,6 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface NewsApi {
-    @GET("top-headlines?country=ru")
+    @GET("everything?q=bitcoin")
     Observable<NewsModel> getNews(@Query("apiKey") String apiKey);
 }

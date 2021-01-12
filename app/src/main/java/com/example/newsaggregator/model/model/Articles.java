@@ -4,13 +4,15 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Articles {
-    public Articles(String author, String title, String description, String url, String urlToImage, String publishedAt, String content) {
-        this.author = author;
+    public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setDescription(String description) {
         this.description = description;
-        this.url = url;
-        this.urlToImage = urlToImage;
-        this.publishedAt = publishedAt;
+    }
+
+    public void setContent(String content) {
         this.content = content;
     }
 
