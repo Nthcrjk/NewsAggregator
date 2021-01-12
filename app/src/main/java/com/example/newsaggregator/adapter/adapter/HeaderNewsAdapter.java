@@ -51,7 +51,8 @@ public class HeaderNewsAdapter extends RecyclerView.Adapter<HeaderNewsAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Articles article = states.get(position);
 
-        article.setContent(TextChanger.fixContent(article.getContent()));
+        if (article.getContent() != null)
+            article.setContent(TextChanger.fixContent(article.getContent()));
 
         if (article.getTitle() != null)
             article.setTitle(TextChanger.fixText(article.getTitle()));

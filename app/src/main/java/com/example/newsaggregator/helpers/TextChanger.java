@@ -11,10 +11,11 @@ public class TextChanger {
         return text;
     }
 
-    public static Spanned addLinkToContent(String sourceLink){
-        String link = "<a href=\"" + sourceLink + "\"> В источнике</a>";
-        Spanned spanned = Html.fromHtml(sourceLink, null, null);
-        return spanned;
+    public static String fixContent(String content){
+        content = content.replaceAll("\\[[+]\\d+\\schars\\]", "");
+        String link = "<a href=\"sourceLink\"> В источнике</a>";
+        Spanned newLink = Html.fromHtml(link, null, null);
+        return content;
     }
 
     public static String fixDate(String date){

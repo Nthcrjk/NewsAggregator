@@ -58,6 +58,7 @@ public class DetailNewsFragment extends Fragment {
         detailItemAuthor.setText(articles.getAuthor());
         detailItemContent.setText(articles.getContent());
 
+
         String link = "<a href=\""+ articles.getUrl() +"\"> в источнике</a>";
         detailItemContent.append(Html.fromHtml(link, null, null));
         detailItemContent.setLinksClickable(true);
