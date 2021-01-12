@@ -4,6 +4,16 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Articles {
+    public Articles(String author, String title, String description, String url, String urlToImage, String publishedAt, String content) {
+        this.author = author;
+        this.title = title;
+        this.description = description;
+        this.url = url;
+        this.urlToImage = urlToImage;
+        this.publishedAt = publishedAt;
+        this.content = content;
+    }
+
     @SerializedName("source")
     @Expose
     private Source source;

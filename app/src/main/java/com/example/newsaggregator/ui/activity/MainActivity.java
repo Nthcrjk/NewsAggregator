@@ -22,7 +22,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationListener {
 
-    //public final static String API_KEY = "4efaaafdb72d4925a544b61efe8bf931";
+    public final static String API_KEY = "4efaaafdb72d4925a544b61efe8bf931";
 
     private FragmentTransaction fTrance;
 

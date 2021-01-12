@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -38,15 +39,13 @@ public class MainFlowFragment extends MvpAppCompatFragment implements NewsListVi
 
     private RecyclerView newsList;
     private HeaderNewsAdapter adapter;
+    private LinearLayoutManager manager;
 
     private Context context;
 
     @Override
     public void onAttach(@NonNull Context context) {
-        //ПЕРЕДЕЛАТЬ!
         this.context = context;
-
-        onNavigationListener = (MainActivity) context;
         super.onAttach(context);
     }
 
@@ -60,8 +59,9 @@ public class MainFlowFragment extends MvpAppCompatFragment implements NewsListVi
 
     @Override
     public void setAdapter(List<Articles> states) {
-
+        manager = new LinearLayoutManager(context);
         adapter = new HeaderNewsAdapter(context, states);
+        newsList.setLayoutManager(manager);
         newsList.setAdapter(adapter);
     }
 }
