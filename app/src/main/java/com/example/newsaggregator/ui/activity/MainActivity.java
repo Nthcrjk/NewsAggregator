@@ -11,6 +11,7 @@ import com.example.newsaggregator.R;
 import com.example.newsaggregator.model.model.NewsModel;
 import com.example.newsaggregator.model.service.Service;
 import com.example.newsaggregator.ui.fragments.OnNavigationListener;
+import com.example.newsaggregator.ui.fragments.flowFragments.MainFlowFragment;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        onNavigate(new MainFlowFragment(), false);
     }
 
     @Override
