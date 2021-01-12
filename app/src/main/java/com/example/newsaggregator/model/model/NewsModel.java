@@ -17,4 +17,16 @@ public class NewsModel {
     @SerializedName("articles")
     @Expose
     private List<Articles> articles;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public int getTotalResults() {
+        return totalResults;
+    }
+
+    public List<Articles> getArticles() {
+        return articles;
+    }
 }
