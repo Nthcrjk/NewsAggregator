@@ -13,14 +13,12 @@
         android:id="@+id/detail_item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="26sp"
-        android:text="Popular Youtuber KSI Tweets “Ethereum” Amid Fresh Rally" />
+        android:textSize="26sp" />
 
     <TextView
         android:id="@+id/detail_item_published"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Published: 2020-12-16"
         android:textSize="12sp" />
 
     <TextView
@@ -29,8 +27,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ethereum pushed higher on Saturday despite Bitcoin flatlining. The cryptocurrency is up 7.5% in the past 24 hours and has moved past $1,300 for the first time since January of 2018. The cryptocurrency remains below the all-time high price of $1,450 despite th…" />
+        android:layout_height="wrap_content" />
 
     <ImageView
         android:id="@+id/detail_item_image"
@@ -54,8 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            style="@style/AuthorWord2"
-            android:text="Nick Chong" />
+            style="@style/AuthorWord2" />
 
     </LinearLayout>
 
@@ -64,7 +60,6 @@
         android:layout_marginTop="10dp"
         android:id="@+id/detail_item_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ethereum pushed higher on Saturday despite Bitcoin flatlining. The cryptocurrency is up 7.5% in the past 24 hours and has moved past $1,300 for the first time since January of 2018.\r\nThe cryptocurren…" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

@@ -35,7 +35,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
             android:textSize="18sp"
-            android:text="Lorem"
             android:paddingTop="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -44,7 +43,6 @@
         <TextView
             style="@style/Description"
             android:id="@+id/header_item_description"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tellus augue, vestibulum id est vel, maximus vestibulum enim. Phasellus eu arcu in ante tincidunt porta in quis elit."
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="5dp"
@@ -73,8 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                style="@style/AuthorWord2"
-                android:text="Romaкin Dillet" />
+                style="@style/AuthorWord2" />
 
             <TextView
                 android:id="@+id/header_item_published"
@@ -82,7 +79,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="right"
-                android:text="Published: 2020-12-16"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
