@@ -12,4 +12,7 @@ import moxy.viewstate.strategy.StateStrategyType;
 @StateStrategyType(AddToEndSingleStrategy.class)
 public interface NewsListView extends MvpView {
     void setAdapter(List<Articles> states);
+
+    void updateAdapterData(List<Articles> newData);
+
 }

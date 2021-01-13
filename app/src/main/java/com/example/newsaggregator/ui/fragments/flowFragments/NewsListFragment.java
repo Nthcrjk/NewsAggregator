@@ -5,10 +5,10 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,31 +17,31 @@ import android.widget.Button;
 import com.example.newsaggregator.R;
 import com.example.newsaggregator.adapter.adapter.HeaderNewsAdapter;
 import com.example.newsaggregator.model.model.Articles;
-import com.example.newsaggregator.model.model.NewsModel;
 import com.example.newsaggregator.presentation.presenter.NewsListPresenter;
 import com.example.newsaggregator.presentation.view.NewsListView;
-import com.example.newsaggregator.ui.activity.MainActivity;
 import com.example.newsaggregator.ui.fragments.OnNavigationListener;
-import com.example.newsaggregator.ui.fragments.fragments.DetailNewsFragment;
 
 import java.util.List;
 
 import moxy.MvpAppCompatFragment;
-import moxy.MvpView;
 import moxy.presenter.InjectPresenter;
 
-public class MainFlowFragment extends MvpAppCompatFragment implements NewsListView {
+public class NewsListFragment extends MvpAppCompatFragment implements NewsListView {
 
     @InjectPresenter
     NewsListPresenter presenter;
 
     private OnNavigationListener onNavigationListener;
 
+    Button btn;
+
     private RecyclerView newsList;
     private HeaderNewsAdapter adapter;
     private LinearLayoutManager manager;
-
     private Context context;
+
+    private boolean loading = true;
+    private int pastVisiblesItems, visibleItemCount, totalItemCount;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -63,5 +63,32 @@ public class MainFlowFragment extends MvpAppCompatFragment implements NewsListVi
         adapter = new HeaderNewsAdapter(context, states);
         newsList.setLayoutManager(manager);
         newsList.setAdapter(adapter);
+
+        newsList.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                loading = true;
+                if (dy > 0) {
+                    visibleItemCount = manager.getChildCount();
+                    totalItemCount = manager.getItemCount();
+                    pastVisiblesItems = manager.findFirstVisibleItemPosition();
+                    if (loading){
+                        if ((visibleItemCount + pastVisiblesItems) >= totalItemCount){
+                            presenter.loadNextNewsPage();
+                        }
+                    }
+                }
+
+            }
+        });
+
+
     }
+
+    @Override
+    public void updateAdapterData(List<Articles> newData) {
+        adapter.getData().addAll(newData);
+        adapter.notifyDataSetChanged();
+    }
+
 }

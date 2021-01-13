@@ -8,6 +8,6 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface NewsApi {
-    @GET("everything?q=bitcoin")
-    Observable<NewsModel> getNews(@Query("apiKey") String apiKey);
+    @GET("everything?q=bitcoin&pageSize=10")
+    Observable<NewsModel> getNews(@Query("page") int page, @Query("apiKey") String apiKey);
 }

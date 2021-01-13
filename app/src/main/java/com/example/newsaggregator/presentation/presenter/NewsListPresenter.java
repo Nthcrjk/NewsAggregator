@@ -24,39 +24,61 @@ import moxy.MvpPresenter;
 @InjectViewState
 public class NewsListPresenter extends MvpPresenter<NewsListView> {
 
-    private ArrayList<Articles> loadList;
+
+    private List<Articles> lastLoaded;
     private NewsApi api;
 
+    private boolean isNotSetAdapter = true;
+    private boolean firstLoad = true;
+    private int countOfPages = 0;
+    private int pagesOpened = 0;
+
+    private final int POSTS_IN_PAGE = 10;
     private final String LOG_TAG = NewsListPresenter.class.getName();
 
     public NewsListPresenter(){
-        loadList = new ArrayList<>();
+        Log.e("gaf", "Constructor");
         api = new Service().getApi();
+        lastLoaded = new ArrayList<>();
 
-        Observable<NewsModel> observable = api.getNews(MainActivity.API_KEY);
+        loadNextNewsPage();
+    }
 
-        observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<NewsModel>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
+    public void loadNextNewsPage(){
+            pagesOpened++;
+            Observable<NewsModel> observable = api.getNews(pagesOpened, MainActivity.API_KEY);
+            observable.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<NewsModel>() {
+                        @Override
+                        public void onSubscribe(@NonNull Disposable d) {
+                        }
 
-                    }
+                        @Override
+                        public void onNext(@NonNull NewsModel newsModel) {
+                            lastLoaded = newsModel.getArticles();
 
-                    @Override
-                    public void onNext(@NonNull NewsModel newsModel) {
-                        loadList.addAll(newsModel.getArticles());
-                    }
+                            int totalRes = newsModel.getTotalResults();
+                            countOfPages = totalRes / POSTS_IN_PAGE;
+                            if ((totalRes / POSTS_IN_PAGE) % POSTS_IN_PAGE != 0)
+                                countOfPages++;
+                        }
 
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        Log.e(LOG_TAG, e.getMessage());
-                    }
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+                            Log.e(LOG_TAG, e.getMessage());
+                        }
 
-                    @Override
-                    public void onComplete() {
-                        getViewState().setAdapter(loadList);
-                    }
-                });
+                        @Override
+                        public void onComplete() {
+                            if (isNotSetAdapter) {
+                                getViewState().setAdapter(lastLoaded);
+                                isNotSetAdapter = false;
+                            }
+                            getViewState().updateAdapterData(lastLoaded);
+                            firstLoad = false;
+                        }
+                    });
+
     }
 }

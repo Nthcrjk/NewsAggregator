@@ -1,7 +1,9 @@
 package com.example.newsaggregator.adapter.adapter;
 
 import android.content.Context;
+import android.nfc.Tag;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +35,10 @@ public class HeaderNewsAdapter extends RecyclerView.Adapter<HeaderNewsAdapter.Vi
 
         this.inflater = LayoutInflater.from(context);
         this.states = states;
+    }
+
+    public List<Articles> getData(){
+        return states;
     }
 
     @NonNull
@@ -67,8 +73,10 @@ public class HeaderNewsAdapter extends RecyclerView.Adapter<HeaderNewsAdapter.Vi
 
         if (article.getAuthor() == null){
             holder.headerItemAuthorWord1.setText("");
-        } else{
+            holder.headerItemAuthorWord2.setText("");
+        } else {
             holder.headerItemAuthorWord2.setText(article.getAuthor());
+            holder.headerItemAuthorWord1.setText("Author: ");
         }
 
         holder.headerItemPublished.setText(article.getPublishedAt());

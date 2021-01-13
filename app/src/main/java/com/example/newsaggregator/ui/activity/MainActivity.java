@@ -6,13 +6,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.newsaggregator.R;
 import com.example.newsaggregator.ui.fragments.OnNavigationListener;
-import com.example.newsaggregator.ui.fragments.flowFragments.MainFlowFragment;
+import com.example.newsaggregator.ui.fragments.flowFragments.NewsListFragment;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationListener {
 
@@ -26,8 +25,12 @@ public class MainActivity extends AppCompatActivity implements OnNavigationListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        setToolBar();
+        onNavigate(new NewsListFragment(), false);
+    }
 
+    private void setToolBar(){
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
         toolbar.setNavigationIcon(R.drawable.abc_vector_test);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -38,13 +41,12 @@ public class MainActivity extends AppCompatActivity implements OnNavigationListe
             }
         });
         toolbar.setTitle("");
-
-        onNavigate(new MainFlowFragment(), false);
     }
 
     @Override
     public void onNavigate(Fragment fragment, boolean isAddToBackStage) {
         fTrance = getSupportFragmentManager().beginTransaction();
+        fTrance.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
         fTrance.replace(R.id.content, fragment);
         if (isAddToBackStage){
             fTrance.addToBackStack(null);
