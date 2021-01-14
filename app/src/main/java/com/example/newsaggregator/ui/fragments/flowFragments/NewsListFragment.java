@@ -54,6 +54,14 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_flow, container, false);
         newsList = (RecyclerView) view.findViewById(R.id.rv_news_list);
+        btn = (Button) view.findViewById(R.id.button2);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.loadNextNewsPage();
+            }
+        });
         return view;
     }
 
@@ -74,15 +82,12 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
                     pastVisiblesItems = manager.findFirstVisibleItemPosition();
                     if (loading){
                         if ((visibleItemCount + pastVisiblesItems) >= totalItemCount){
-                            presenter.loadNextNewsPage();
+
                         }
                     }
                 }
-
             }
         });
-
-
     }
 
     @Override

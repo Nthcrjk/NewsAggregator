@@ -45,6 +45,7 @@ public class NewsListPresenter extends MvpPresenter<NewsListView> {
     }
 
     public void loadNextNewsPage(){
+            Log.e("gaf", "открыто: " + Integer.toString(pagesOpened));
             pagesOpened++;
             Observable<NewsModel> observable = api.getNews(pagesOpened, MainActivity.API_KEY);
             observable.subscribeOn(Schedulers.io())
@@ -74,9 +75,10 @@ public class NewsListPresenter extends MvpPresenter<NewsListView> {
                             if (isNotSetAdapter) {
                                 getViewState().setAdapter(lastLoaded);
                                 isNotSetAdapter = false;
+                                firstLoad = false;
+                            } else {
+                                getViewState().updateAdapterData(lastLoaded);
                             }
-                            getViewState().updateAdapterData(lastLoaded);
-                            firstLoad = false;
                         }
                     });
 
