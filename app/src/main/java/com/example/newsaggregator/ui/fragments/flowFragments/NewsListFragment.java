@@ -33,8 +33,6 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
 
     private OnNavigationListener onNavigationListener;
 
-    Button btn;
-
     private RecyclerView newsList;
     private HeaderNewsAdapter adapter;
     private LinearLayoutManager manager;
@@ -54,14 +52,6 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_flow, container, false);
         newsList = (RecyclerView) view.findViewById(R.id.rv_news_list);
-        btn = (Button) view.findViewById(R.id.button2);
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.loadNextNewsPage();
-            }
-        });
         return view;
     }
 
@@ -75,14 +65,21 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
         newsList.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                loading = true;
                 if (dy > 0) {
                     visibleItemCount = manager.getChildCount();
                     totalItemCount = manager.getItemCount();
                     pastVisiblesItems = manager.findFirstVisibleItemPosition();
                     if (loading){
                         if ((visibleItemCount + pastVisiblesItems) >= totalItemCount){
-
+                            loading = false;
+                            getActivity().getWindow().getDecorView().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    loading = true;
+                                }
+                            }, 1000);
+                            presenter.loadNextNewsPage();
+                            Log.e("gaf", "Scrolled");
                         }
                     }
                 }

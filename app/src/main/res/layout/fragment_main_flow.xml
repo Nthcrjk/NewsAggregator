@@ -6,12 +6,6 @@
     tools:context=".ui.fragments.flowFragments.NewsListFragment"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Следующая страница" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_news_list"
         android:layout_width="match_parent"
